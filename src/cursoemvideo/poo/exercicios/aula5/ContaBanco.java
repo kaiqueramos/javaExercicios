@@ -60,12 +60,14 @@ public class ContaBanco {
 
     public void abrirConta(String tipoConta) {
         if (tipoConta.equals("CC")){
+            this.setTipo(tipoConta);
+            this.setStatus(true);
             this.setSaldo(50.0f);
-            this.status = true;
             System.out.println("A conta corrente está aberta! ");
         }else if (tipoConta.equals("CP")){
+            this.setTipo(tipoConta);
+            this.setStatus(true);
             this.setSaldo(150.0f);
-            this.status = true;
             System.out.println("A conta poupança aberta! ");
         }else {
             System.out.println("ERRO! Os tipos válidos de conta são CC e CP");
@@ -84,7 +86,11 @@ public class ContaBanco {
     }
 
     public void depositar(float valor){
-        this.saldo += valor;
+        if (status){
+            setSaldo(getSaldo() + valor);
+        }else {
+            System.out.println("A conta está fechada! ");
+        }
     }
 
     public void sacar(float valor){
